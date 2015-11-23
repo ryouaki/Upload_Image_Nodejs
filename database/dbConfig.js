@@ -5,5 +5,4 @@ exports.dbConfig =  {
 	user: 'admin',
 	pass: 'admin',
 	auth: true,
-	discription: 'bicycleGo',
 };

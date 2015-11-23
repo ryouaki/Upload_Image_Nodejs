@@ -1,41 +1,13 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to 1<%= title %></p>
-    <form class="form-horizontal">
-		<div class="form-group">
-			<label for="inputEmail3" class="col-sm-2 control-label">Email</label>
-			<div class="col-sm-10">
-				<input type="email" class="form-control" id="inputEmail3"
-					placeholder="Email">
-			</div>
-		</div>
-		<div class="form-group">
-			<label for="inputPassword3" class="col-sm-2 control-label">Password</label>
-			<div class="col-sm-10">
-				<input type="password" class="form-control" id="inputPassword3"
-					placeholder="Password">
-			</div>
-		</div>
-		<div class="form-group">
-			<div class="col-sm-offset-2 col-sm-10">
-				<div class="checkbox">
-					<label> <input type="checkbox"> Remember me
-					</label>
-				</div>
-			</div>
-		</div>
-		<div class="form-group">
-			<div class="col-sm-offset-2 col-sm-10">
-				<button type="submit" class="btn btn-default">Sign in</button>
-				<button type="submit" class="btn btn-default">Cancel</button>
-			</div>
-		</div>
-	</form>
-  </body>
-</html>
+<% include ../header.html %>
+<body class="admin_backgroud_color">
+	<div class="container">
+		<form class="admin_login_form" role="form" method="post" action="/admin/login" >
+			<h3><p class="text-center">Please sign in</p></h3>
+			<input name="name" type="tel"      class="form-control" placeholder="Email address"> 
+			<input name="pass" type="password" class="form-control" placeholder="Password"">
+			<button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+			<% if (message.length) { %><div class="alert alert-danger"><%= message %></div> <%}%>
+		</form>
+	</div>
+</body>
+<% include ../footer.html %>

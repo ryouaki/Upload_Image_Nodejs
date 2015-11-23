@@ -10,6 +10,7 @@
     "ejs": "*",
     "mongodb": "*",
     "connect-mongo":"*",
-    "express-session": "*"
+    "express-session": "*",
+    "body-parser":"*"
   }
 }

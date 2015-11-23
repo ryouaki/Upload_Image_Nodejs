@@ -8,11 +8,14 @@ var express = require('express')
   , api = require('./routes/api')
   , http = require('http')
   , path = require('path')
+  , utils = require('./common/utils')
   , session = require('express-session')
   , MongoStore = require('connect-mongo')(session)
   , dbConfig = require('./database/dbConfig').dbConfig
   , MongoClient = require('mongodb').MongoClient
-  , message = require('./message/message');
+  , message = require('./message/message')
+  , bodyParser = require('body-parser')
+  ;
 
 var app = express();
 var db  = null;
@@ -24,15 +27,20 @@ app.engine('.html', require('ejs').__express);
 app.set('view engine', 'html');
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+
 app.use(session({
-    secret: dbConfig.discription,
+    secret: utils.secret(),
     store: new MongoStore({
         db: dbConfig.name,
+        host: dbConfig.host,
+        port: dbConfig.port,
+        ttl:1*24*60*60,
     })
 }));
 
 app.use('/',function(req,res,next){
-	console.log('app /');
 	next();
 });
 
@@ -44,13 +52,19 @@ app.use('/admin',admin);
 app.use('/api',api);
 
 MongoClient.connect("mongodb://"+dbConfig.host+":"+dbConfig.port+"/"+dbConfig.name, function(err, database) {
-	  if(err) throw err;
+	
+	if(err) {
+		utils.ERR('Database connect failed ! ');
+		return
+	}
 
-	  db = database;
+	db = database;
+	
+	global.db = db;
 
-	  // Start the application after the database connection is ready
-	  http.createServer(app).listen(app.get('port'), function(){
-		  console.log('Express server listening on port ' + app.get('port'));
-	  });
+	// Start the application after the database connection is ready
+	http.createServer(app).listen(app.get('port'), function(){
+	  utils.LOG('Express server listening on port ' + app.get('port'));
+	});
 });
 
