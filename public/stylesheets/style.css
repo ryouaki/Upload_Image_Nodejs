@@ -7,3 +7,13 @@
 .admin_backgroud_color {
 	background-color:#eee;
 }
+
+.admin_main_panel {
+	position: relative;
+    padding: 5px 5px 5px;
+    margin: 0 5px 5px;
+    border-width: 1px;
+    border-color: #ddd;
+    border-radius: 4px 4px 4px 4px;
+    box-shadow: none;
+}

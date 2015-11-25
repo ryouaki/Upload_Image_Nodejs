@@ -1,6 +1,7 @@
 var express = require('express')
   , adminRoute = express()
   , messages = require('../message/message')
+  , utils = require('../common/utils')
   ;
 
 adminRoute.use('/',function(req,res,next){
@@ -17,14 +18,26 @@ adminRoute.post('/login',function(req,res,next){
 		if(data==undefined||data==null) {
 			res.render('admin/index',{title:messages.admin.title,message:messages.admin.login_failed});
 		}else{
-			req.session.user_flg==true;
-			res.render('admin/admin',{title:messages.admin.title});
+			req.session.user_flg=true;
+			res.render('admin/main',{title:messages.admin.title});
 		}
 	});
 });
 
 adminRoute.get('/main',function(req,res,next){
-	
+	res.status(200).json({main:"message"});
+});
+
+adminRoute.get('/product',function(req,res,next){
+	res.render('admin/main',{title:messages.admin.title});
+});
+
+adminRoute.get('/user',function(req,res,next){
+	res.render('admin/main',{title:messages.admin.title});
+});
+
+adminRoute.get('/system',function(req,res,next){
+	res.render('admin/main',{title:messages.admin.title});
 });
 
 module.exports = adminRoute;
