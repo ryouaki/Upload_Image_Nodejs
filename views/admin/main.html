@@ -1,24 +1,24 @@
 <% include ../header.html %>
 <body class="admin_backgroud_color" onload="admin_onload(this)">
-	<div class="admin_main_panel">
-		<ul class="nav nav-tabs nav-tabs" id="main_menu">
+	<div class="admin_main_panel" id="admin_main_panel_body">
+		<ul class="nav nav-tabs admin_main_no_bottom" id="admin_main_menu">
 		</ul>
 		<div class="panel panel-default">
 		  <!-- Default panel contents -->
-		  <div class="panel-heading" id="panel-header">Panel heading</div>
-		  <!-- Table -->
-		  <table class="table">
-		    <tr>
-		                  <td>3</td>
-		                  <td>Larry</td>
-		                  <td>the Bird</td>
-		                  <td>@twitter</td>
-		                </tr>
-		  </table>
+		  <nav class="navbar navbar-default admin_main_navbar_no_radius_margin" role="navigation">
+		  	<div id="admin_main_panel_header" class="navbar-text "></div>
+		  	<div>
+			  	<ul class="nav navbar-nav navbar-right admin_main_no_margin_right" id="admin_main_sub_menu">
+			    </ul>
+		    </div>
+		  </nav>
+		  <!-- Main page -->
+		  <div id="admin_main_div" class="admin_main_div">
+		  </div>
 		</div>
 	</div>
-	<!-- Popup Window -->
 	<script src="/js/controller/admin_main_controller.js"></script>
 	<script src="/js/controller/messages.js"></script>
+	<script src="/js/utils/utilsUI.js"></script>
 </body>
 <% include ../footer.html %>
