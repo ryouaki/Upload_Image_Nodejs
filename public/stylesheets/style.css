@@ -114,7 +114,7 @@
     width : 4%;
     margin: 0px;
     padding-bottom: 0px !important;
-    text-align: right;
+    padding-left: 12px !important;
 }
 
 .admin_main_product_list_col1 {
@@ -171,4 +171,20 @@ cursor: pointer;
 	margin-left: 5px;
 	padding-left: 5px;
 	padding-right: 5px;
+	width: 150px;
+    height: 100px;
+}
+
+.admin_main_product_item_image_btn {
+	position: absolute;
+	text-align: center;
+	color: #686868;
+	left: 5px;
+	height: 97px;
+	width: 140px;
+	border-radius: 4px;
+	background-color: rgba(232, 232, 232, 0.5);
+	font-size: 60px;
+	padding-top: 0px;
+	top: 0px;
 }

@@ -202,18 +202,63 @@ function execProduct(event) {
   });
 }
 
+function show_Btn(e) {
+  $(e.currentTarget).find(".admin_main_product_item_image_btn").removeClass("hidden");
+}
+
+function hide_Btn(e) {
+  $(e.currentTarget).find(".admin_main_product_item_image_btn").addClass("hidden");
+}
+
+function remove_Btn(e) {
+  $(e.currentTarget).parent().parent().remove();
+}
+
 function showProductItemDialog(data) {
   $("#admin_main_product_dialog_div").load("/template/admin_main/admin_main_product_item.html", null,
       function(responseTxt, statusTxt, xhr) {
-        $("#image_list").append('<div id="admin_main_product_item_new_btn" class="col-xs-3 admin_main_product_item_image">'+
-            '<a href="#" class="thumbnail"><img src="/images/noimage.jpg" alt="...">'+
-            '</a></div>');
-        $("#admin_main_product_item_new_btn").mouseover(function(event){
-          
+        $("#image_list").append(
+            '<div id="admin_main_product_item_new_btn" class="col-xs-3 admin_main_product_item_image">'+
+              '<a href="#" class="thumbnail">'+
+                '<img src="/images/noimage.jpg" alt="...">'+
+                '<div id="admin_main_product_item_image_add" class="admin_main_product_item_image_btn hidden" onclick="admin_main_product_item_updatefile.click()">+</div>'+
+                '<input class="hidden" id="admin_main_product_item_updatefile" type="file">'+
+              '</a>'+
+            '</div>');
+        $("#admin_main_product_item_new_btn").mouseover(show_Btn);
+        $("#admin_main_product_item_new_btn").mouseout(hide_Btn);
+        $("#admin_main_product_item_updatefile").change(function(event){
+          if(event.currentTarget.files==undefined||event.currentTarget.files[0]==undefined) {
+            return;
+          }
+          var file = event.currentTarget.files[0];
+          var reader = new FileReader();
+          reader.onload = function(evt){
+            var img = document.createElement("img");
+            img.src = evt.target.result;
+            img.width ="480px";
+            img.height="320px";
+            img.onload = function(){
+              var canvas = document.createElement("canvas");
+              canvas.width =480;
+              canvas.height=320;
+              var ctx = canvas.getContext("2d");
+              ctx.drawImage(img,0,0,480,320);
+              $("#admin_main_product_item_new_btn").before(
+                '<div class="col-xs-3 admin_main_product_item_image" onmouseover="show_Btn(event)" onmouseout="hide_Btn(event)">'+
+                  '<a href="#" class="thumbnail" >'+
+                    '<img src="'+canvas.toDataURL("image/png")+'">'+
+                    '<div class="admin_main_product_item_image_btn hidden" onclick="remove_Btn(event)">-</div>'+
+                  '</a>'+
+                '</div>');
+            }
+          }
+          reader.readAsDataURL(file);
         });
+        
         $("#admin_main_product_dialog_title").text(data.title);
         $('#admin_main_product_dialog').on('hide.bs.modal', function (e) {
-          // save information
+          $("#admin_main_product_dialog_div").empty();
         });
         $('#admin_main_product_dialog').on('hidden.bs.modal', function (e) {
           $("#admin_main_product_dialog_div").empty();
@@ -242,8 +287,4 @@ function execSystem(event) {
       $("#process_dialog").hide();
     }, 3000);
   });
-}
-
-function addNewItem() {
-  console.log('add new item');
 }
