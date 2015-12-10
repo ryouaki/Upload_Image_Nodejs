@@ -1,21 +1,62 @@
 <!-- Modal -->
 <div class="modal fade" id="admin_main_product_dialog" tabindex="-1" role="dialog" aria-labelledby="admin_main_product_dialog" aria-hidden="true">
-  <div class="modal-dialog">
+  <div class="modal-dialog admin_main_product_item">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
         <h4 class="modal-title" id="admin_main_product_dialog_title">Modal title</h4>
       </div>
-      <div class="modal-body">
+      <div class="modal-body admin_main_product_item_modal">
         <div class="row" id="image_list">
-         
+          <!-- images -->
         </div>
-        <div id="admin_main_update_modal"></div>
+        <div class="admin_main_product_item_body">
+         <form id="admin_main_update_modal" class="form-horizontal" role="form" method="post" action="/admin/newProduct">
+            <table class="table" id="admin_main_update_modal_fields">
+                <thead>
+                  <tr>
+                    <th class="admin_main_update_modal_list_col1">
+                    </th>
+                    <th class="admin_main_update_modal_list_col2">
+                    </th>
+                  </tr>
+                </thead>
+                <tr>
+                  <td>Year</td>
+                  <td>
+                    <select name="year" class="form-control input-sm" id="admin_main_product_item_years">
+                    </select> 
+                  </td>
+                </tr>
+                <tr>
+                  <td>Type</td>
+                  <td>
+                    <select name="type" class="form-control input-sm" id="admin_main_product_item_types">
+                      <option>折叠</option>
+                      <option>Road</option>
+                      <option>Moutain</option>
+                    </select> 
+                  </td>
+                </tr>
+                <tr>
+                  <td>Brand</td>
+                  <td>
+                    <select name="brand" class="form-control input-sm"  id="admin_main_product_item_brands">
+                      <option>Merida</option>
+                     <option>Giant</option>
+                     <option>Cervelo</option>
+                     <option>Cannondale</option>
+                     <option>Willer</option>
+                    </select> 
+                  </td>
+                </tr>
+            </table>
+         </form>
+        </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-default">Reset</button>
-        <button type="button" class="btn btn-primary">Save</button>
+        <button id="admin_main_product_dialog_save" type="button" class="btn btn-primary">Save</button>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
